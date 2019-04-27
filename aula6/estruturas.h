@@ -12,7 +12,7 @@ typedef struct fila{
 
 //--------------------------------//
 
-TFila* inicializa (void){
+TFila* inicializa_fila (void){
      TFila *nova=(TFila*)malloc(sizeof(TFila));
   nova->ini=NULL;
   nova->fim=NULL;
@@ -36,7 +36,7 @@ int retira (TFila *f){
     free (VVM);
     return res;
 }
-void libera (TFila *f){
+void libera_fila (TFila *f){
      NO* VVM=f->ini,*anda=f->ini;
     while(anda){
         VVM=anda;
@@ -46,11 +46,11 @@ void libera (TFila *f){
     f->ini=NULL;
     f->fim=NULL;
 }
-int vazia (TFila *f){
+int vazia_fila (TFila *f){
     return f->ini==NULL;
 }
 
-void imprime (TFila *f){
+void imprime_fila (TFila *f){
     NO* anda=f->ini;
     while(anda){
         printf(" %d",anda->info);
@@ -60,3 +60,49 @@ void imprime (TFila *f){
 }
 
 //--------------------------------//
+
+
+
+typedef struct pilha{
+    NO* ini;
+}TPilha;
+
+TPilha * inicializa_pilha(void){
+  TPilha *nova=(TPilha*)malloc(sizeof(TPilha));
+  nova->ini=NULL;
+    return nova;
+}
+void push (TPilha *p, int elem){
+    NO* novo=(NO*)malloc(sizeof(NO));
+    novo->prox=p->ini;
+    novo->info=elem;
+    p->ini=novo;
+}
+int pop (TPilha *p){
+    NO* VVM=p->ini;
+    if(!VVM)exit(5);
+    p->ini=p->ini->prox;
+    int res=VVM->info;
+    free (VVM);
+    return res;
+}
+void libera_pilha (TPilha *p){
+    NO* VVM=p->ini,*anda=p->ini;
+    while(anda){
+        VVM=anda;
+        anda=anda->prox;
+        free (VVM);
+    }
+    p->ini=NULL;
+}
+void imprime_pilha (TPilha *p){
+    NO* anda=p->ini;
+    while(anda){
+        printf(" %d",anda->info);
+        anda=anda->prox;
+    }
+    printf("\n");
+}
+int vazia_pilha (TPilha *p){
+return p->ini==NULL;
+}
