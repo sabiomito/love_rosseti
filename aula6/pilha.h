@@ -8,6 +8,7 @@ typedef struct no{
 typedef struct pilha{
     NO* ini;
 }TPilha;
+
 TPilha * inicializa (void){
   TPilha *nova=(TPilha*)malloc(sizeof(TPilha));
   nova->ini=NULL;
@@ -45,6 +46,5 @@ void imprime (TPilha *p){
     printf("\n");
 }
 int vazia (TPilha *p){
-if(p->ini)return 0;
-return 1;
+return p->ini==NULL;
 }
